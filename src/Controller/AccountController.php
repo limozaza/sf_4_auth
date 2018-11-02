@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AccountController
- * @IsGranted("ROLE_USER_1")
  */
 class AccountController extends AbstractController
 {
@@ -17,7 +16,16 @@ class AccountController extends AbstractController
      */
     public function index()
     {
-        //dd($this->getUser()->getFirstName());
         return $this->render('account/index.html.twig', []);
+    }
+
+    /**
+     * @Route("/api/account", name="api_account")
+     */
+    public function accountApi(){
+        $user = $this->getUser();
+        return $this->json($user,200,[],[
+            'groups' => ['main']
+        ]);
     }
 }

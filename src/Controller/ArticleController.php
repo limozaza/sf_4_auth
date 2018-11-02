@@ -12,6 +12,7 @@ class ArticleController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
         ]);

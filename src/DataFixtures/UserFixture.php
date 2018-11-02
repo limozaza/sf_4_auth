@@ -34,7 +34,21 @@ class UserFixture extends Fixture
             $manager->persist($user);
         }
 
-        $manager->persist($user);
+
+        for ($i=0;$i<2;$i++){
+            $user = new User();
+            $user->setEmail(sprintf('zak_admin%d@yopmail.com',$i));
+            $user->setFirstName(sprintf('zakaria_admin%d',$i));
+            $user->setRoles(['ROLE_ADMIN']);
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,'dole'
+                )
+            );
+
+            $manager->persist($user);
+        }
+
 
         $manager->flush();
     }

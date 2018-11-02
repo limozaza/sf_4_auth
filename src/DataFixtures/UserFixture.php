@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ApiToken;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -30,24 +31,28 @@ class UserFixture extends Fixture
                     $user,'dole'
                 )
             );
+            $apiToken01 = new ApiToken($user);
+            $apiToken02 = new ApiToken($user);
 
+            $manager->persist($apiToken01);
+            $manager->persist($apiToken02);
             $manager->persist($user);
         }
 
 
-        for ($i=0;$i<2;$i++){
-            $user = new User();
-            $user->setEmail(sprintf('zak_admin%d@yopmail.com',$i));
-            $user->setFirstName(sprintf('zakaria_admin%d',$i));
-            $user->setRoles(['ROLE_ADMIN']);
-            $user->setPassword(
-                $this->passwordEncoder->encodePassword(
-                    $user,'dole'
-                )
-            );
-
-            $manager->persist($user);
-        }
+//        for ($i=0;$i<2;$i++){
+//            $user = new User();
+//            $user->setEmail(sprintf('zak_admin%d@yopmail.com',$i));
+//            $user->setFirstName(sprintf('zakaria_admin%d',$i));
+//            $user->setRoles(['ROLE_ADMIN']);
+//            $user->setPassword(
+//                $this->passwordEncoder->encodePassword(
+//                    $user,'dole'
+//                )
+//            );
+//
+//            $manager->persist($user);
+//        }
 
 
         $manager->flush();

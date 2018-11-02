@@ -7,17 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AccountController
- * @IsGranted("ROLE_USER_1")
+ * Class DefaultController
+ * @IsGranted("ROLE_USER")
  */
-class AccountController extends AbstractController
+class DefaultController extends AbstractController
 {
     /**
-     * @Route("/account", name="app_account")
+     * @Route("/default", name="default")
      */
     public function index()
     {
-        //dd($this->getUser()->getFirstName());
-        return $this->render('account/index.html.twig', []);
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
     }
 }

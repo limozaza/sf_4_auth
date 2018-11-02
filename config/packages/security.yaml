@@ -23,7 +23,9 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 2592000
-
+    role_hierarchy:
+#        ROLE_ADMIN: [ROLE_ROLE]
+        ROLE_ROLE: [ROLE_ROLE_1, ROLE_ROLE_2]
             # activate different ways to authenticate
 
             # http_basic: true
